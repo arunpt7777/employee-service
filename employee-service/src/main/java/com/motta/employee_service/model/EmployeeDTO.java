@@ -1,26 +1,24 @@
-package com.motta.employee_service.employee;
+package com.motta.employee_service.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+public class EmployeeDTO {
 
-@Entity
-public class Employee {
-
-	@Id
 	private Integer id;
-
+	private Integer employeeNumber;
+	private Integer age;
 	private String firstName;
 	private String lastName;
 	private String email;
 	private String phone;
 
-	public Employee() {
-
+	public EmployeeDTO() {
 	}
 
-	public Employee(Integer id, String firstName, String lastName, String email, String phone) {
+	public EmployeeDTO(Integer id, Integer employeeNumber, Integer age, String firstName, String lastName, String email,
+			String phone) {
 		super();
 		this.id = id;
+		this.employeeNumber = employeeNumber;
+		this.age = age;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -33,6 +31,22 @@ public class Employee {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getEmployeeNumber() {
+		return employeeNumber;
+	}
+
+	public void setEmployeeNumber(Integer employeeNumber) {
+		this.employeeNumber = employeeNumber;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public String getFirstName() {
@@ -65,12 +79,6 @@ public class Employee {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	@Override
-	public String toString() {
-		return "Employee [employeeId=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phone=" + phone + "]";
 	}
 
 }
