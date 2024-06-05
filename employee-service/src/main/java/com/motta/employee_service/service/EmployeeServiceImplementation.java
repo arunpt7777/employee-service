@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.motta.employee_service.entity.Employee;
+import com.motta.employee_service.exception.EmployeeAlreadyExistsException;
 import com.motta.employee_service.exception.EmployeeNotFoundException;
 import com.motta.employee_service.mapper.EmployeeMapper;
 import com.motta.employee_service.model.EmployeeDTO;
@@ -21,8 +22,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	@Override
 	public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
 
+		// CHeck if id already exists
+		Employee employee = repository.findById(employeeDTO.getId()).get();
+		if (employee != null)
+			throw new EmployeeAlreadyExistsException("Employee id = " + employee.getId() + " already Exists!");
+
 		// Convert EmployeeDTO into User JPA Entity
-		Employee employee = EmployeeMapper.mapToEmployee(employeeDTO);
+		employee = EmployeeMapper.mapToEmployee(employeeDTO);
 		Employee savedEmployee = repository.save(employee);
 
 		// Convert Employee JPA entity to UserDto
