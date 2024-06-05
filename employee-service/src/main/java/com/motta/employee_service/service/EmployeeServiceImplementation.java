@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.motta.employee_service.entity.Employee;
+import com.motta.employee_service.exception.EmployeeNotFoundException;
 import com.motta.employee_service.mapper.EmployeeMapper;
 import com.motta.employee_service.model.EmployeeDTO;
 import com.motta.employee_service.repository.EmployeeRepository;
@@ -32,6 +33,8 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	@Override
 	public EmployeeDTO retrieveEmployeeById(Integer id) {
 		Employee employee = repository.findById(id).get();
+		if (employee == null)
+			throw new EmployeeNotFoundException("Employee id = " + id + " not found. Please enter different id");
 		return EmployeeMapper.mapToEmployeeDTO(employee);
 	}
 

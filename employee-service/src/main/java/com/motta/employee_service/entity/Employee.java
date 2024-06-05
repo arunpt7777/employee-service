@@ -1,12 +1,17 @@
 package com.motta.employee_service.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 
 @Entity
+@SequenceGenerator(name = "Custom_Sequence", sequenceName = "custom_sequence", initialValue = 1000, allocationSize = 1)
 public class Employee {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Custom_Sequence")
 	private Integer id;
 
 	private Integer employeeNumber;
