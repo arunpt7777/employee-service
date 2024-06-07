@@ -1,10 +1,18 @@
 package com.motta.employee_service.entity;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 
 @Entity
 @SequenceGenerator(name = "Custom_Sequence", sequenceName = "custom_sequence", initialValue = 1000, allocationSize = 1)
@@ -14,11 +22,25 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Custom_Sequence")
 	private Integer id;
 
+	@Size(min = 6, max = 6, message = "Please provide at least 6 difits for the employee number")
+	@Pattern(regexp = "(^$|[0-9]{10})")
 	private Integer employeeNumber;
+
+	@Min(value = 18, message = "Age must be greater than 18")
+	@Max(value = 90, message = "Age must be smaller than 90")
 	private Integer age;
+
+	@NotEmpty(message = "first name is mandatory")
 	private String firstName;
+
+	@NotEmpty(message = "Last name is mandatory")
 	private String lastName;
+
+	@Email(message = "Email should be valid")
 	private String email;
+
+	@Size(min = 10, max = 10, message = "Phone number must contain only ten digits")
+	@Pattern(regexp = "(^$|[0-9]{10})")
 	private String phone;
 
 	public Employee() {

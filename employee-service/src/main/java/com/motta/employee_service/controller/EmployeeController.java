@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.motta.employee_service.model.EmployeeDTO;
@@ -24,7 +25,7 @@ public class EmployeeController {
 
 	// create Employee REST API
 	@PostMapping("/employees")
-	public ResponseEntity<EmployeeDTO> createUser(@RequestBody EmployeeDTO employeeDTO) {
+	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
 		EmployeeDTO savedEmployee = employeeService.createEmployee(employeeDTO);
 		return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
 	}
@@ -36,10 +37,18 @@ public class EmployeeController {
 		return new ResponseEntity<>(employee, HttpStatus.OK);
 	}
 
+	// Retrieve Employee by id using RequestParam REST API
+	// For example, http://localhost:8080/employee?id=10001
+	@GetMapping("/employee")
+	public ResponseEntity<EmployeeDTO> retrieveEmployeeByIdRequestParam(@RequestParam Integer id) {
+		EmployeeDTO employee = employeeService.retrieveEmployeeById(id);
+		return new ResponseEntity<>(employee, HttpStatus.OK);
+	}
+
 	// Retrieve All Employees REST API
 	@GetMapping("/employees")
 	public ResponseEntity<List<EmployeeDTO>> getAllEmployees() {
-		List<EmployeeDTO> employees = employeeService.getAllEmployees();
+		List<EmployeeDTO> employees = employeeService.retrieveAllEmployees();
 		return new ResponseEntity<>(employees, HttpStatus.OK);
 	}
 

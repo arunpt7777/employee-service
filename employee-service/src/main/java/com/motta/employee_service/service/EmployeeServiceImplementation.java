@@ -1,6 +1,7 @@
 package com.motta.employee_service.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,10 @@ import com.motta.employee_service.mapper.EmployeeMapper;
 import com.motta.employee_service.model.EmployeeDTO;
 import com.motta.employee_service.repository.EmployeeRepository;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class EmployeeServiceImplementation implements EmployeeService {
 
 	@Autowired
@@ -23,13 +27,13 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	public EmployeeDTO createEmployee(EmployeeDTO employeeDTO) {
 
 		// CHeck if id already exists
-		Employee employee = repository.findById(employeeDTO.getId()).get();
-		if (employee != null)
-			throw new EmployeeAlreadyExistsException("Employee id = " + employee.getId() + " already Exists!");
+		Optional<Employee> employee = repository.findById(employeeDTO.getId());
+		if (employee.isPresent())
+			throw new EmployeeAlreadyExistsException("Employee id = " + employeeDTO.getId() + " already Exists!");
 
 		// Convert EmployeeDTO into User JPA Entity
-		employee = EmployeeMapper.mapToEmployee(employeeDTO);
-		Employee savedEmployee = repository.save(employee);
+		Employee newEmployee = EmployeeMapper.mapToEmployee(employeeDTO);
+		Employee savedEmployee = repository.save(newEmployee);
 
 		// Convert Employee JPA entity to UserDto
 		EmployeeDTO savedEmployeeDTO = EmployeeMapper.mapToEmployeeDTO(savedEmployee);
@@ -45,7 +49,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	}
 
 	@Override
-	public List<EmployeeDTO> getAllEmployees() {
+	public List<EmployeeDTO> retrieveAllEmployees() {
 		List<Employee> employees = repository.findAll();
 		return employees.stream().map(EmployeeMapper::mapToEmployeeDTO).collect(Collectors.toList());
 	}
@@ -53,6 +57,10 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	@Override
 	public EmployeeDTO updateEmployee(EmployeeDTO employeeDTO) {
 		Employee existingEmployee = repository.findById(employeeDTO.getId()).get();
+		if (existingEmployee == null)
+			throw new EmployeeNotFoundException(
+					"Employee id = " + employeeDTO.getId() + " not found. Please enter different id");
+
 		existingEmployee.setAge(employeeDTO.getAge());
 		existingEmployee.setEmail(employeeDTO.getEmail());
 		existingEmployee.setEmployeeNumber(employeeDTO.getEmployeeNumber());

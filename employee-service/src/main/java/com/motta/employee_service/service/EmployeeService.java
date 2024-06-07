@@ -10,7 +10,7 @@ public interface EmployeeService {
 
 	EmployeeDTO retrieveEmployeeById(Integer id);
 
-	List<EmployeeDTO> getAllEmployees();
+	List<EmployeeDTO> retrieveAllEmployees();
 
 	EmployeeDTO updateEmployee(EmployeeDTO employeeDTO);
 
