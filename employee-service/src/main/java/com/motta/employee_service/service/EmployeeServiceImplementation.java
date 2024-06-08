@@ -76,4 +76,11 @@ public class EmployeeServiceImplementation implements EmployeeService {
 	public void deleteEmployee(Integer id) {
 		repository.deleteById(id);
 	}
+
+	@Override
+	public List<EmployeeDTO> retrieveAllEmployeesByGender(String gender) {
+		List<Employee> employees = repository.findAll();
+		return employees.stream().filter(emp -> emp.getGender().equalsIgnoreCase(gender))
+				.map(EmployeeMapper::mapToEmployeeDTO).collect(Collectors.toList());
+	}
 }

@@ -9,12 +9,13 @@ public class EmployeeDTO {
 	private String lastName;
 	private String email;
 	private String phone;
+	private String gender;
 
 	public EmployeeDTO() {
 	}
 
 	public EmployeeDTO(Integer id, Integer employeeNumber, Integer age, String firstName, String lastName, String email,
-			String phone) {
+			String phone, String gender) {
 		super();
 		this.id = id;
 		this.employeeNumber = employeeNumber;
@@ -23,6 +24,7 @@ public class EmployeeDTO {
 		this.lastName = lastName;
 		this.email = email;
 		this.phone = phone;
+		this.gender = gender;
 	}
 
 	public Integer getId() {
@@ -79,6 +81,14 @@ public class EmployeeDTO {
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }

@@ -36,6 +36,9 @@ public class Employee {
 	@NotEmpty(message = "Last name is mandatory")
 	private String lastName;
 
+	@NotEmpty(message = "Gender is mandatory")
+	private String gender;
+
 	@Email(message = "Email should be valid")
 	private String email;
 
@@ -47,16 +50,29 @@ public class Employee {
 
 	}
 
-	public Employee(Integer id, Integer employeeNumber, Integer age, String firstName, String lastName, String email,
-			String phone) {
+	public Employee(Integer id, Integer employeeNumber,
+			@Min(value = 18, message = "Age must be greater than 18") @Max(value = 90, message = "Age must be smaller than 90") Integer age,
+			@NotEmpty(message = "first name is mandatory") String firstName,
+			@NotEmpty(message = "Last name is mandatory") String lastName,
+			@NotEmpty(message = "Gender is mandatory") String gender,
+			@Email(message = "Email should be valid") String email, String phone) {
 		super();
 		this.id = id;
 		this.employeeNumber = employeeNumber;
 		this.age = age;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public Integer getId() {

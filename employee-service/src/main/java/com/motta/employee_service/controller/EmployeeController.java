@@ -67,4 +67,11 @@ public class EmployeeController {
 		employeeService.deleteEmployee(id);
 		return new ResponseEntity<>("Employee successfully deleted!", HttpStatus.OK);
 	}
+
+	// Retrieve All Employees by gender REST API
+	@GetMapping("/employeesByGender/{gender}")
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployeesByGender(@PathVariable("gender") String gender) {
+		List<EmployeeDTO> maleEmployees = employeeService.retrieveAllEmployeesByGender(gender);
+		return new ResponseEntity<>(maleEmployees, HttpStatus.OK);
+	}
 }
