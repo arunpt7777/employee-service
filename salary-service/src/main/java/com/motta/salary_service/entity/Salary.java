@@ -1,5 +1,7 @@
 package com.motta.salary_service.entity;
 
+import javax.validation.constraints.Size;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,7 +20,7 @@ public class Salary {
 	@NotEmpty(message = "Currency must not be empty")
 	private String currency;
 
-	@NotEmpty(message = "Amount must not be empty")
+	@Size(min = 1, message = "Amount must not be empty")
 	private Double amount;
 
 	public Salary() {
