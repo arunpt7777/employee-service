@@ -3,6 +3,7 @@ package com.motta.employee_service.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,15 +18,25 @@ import org.springframework.web.bind.annotation.RestController;
 import com.motta.employee_service.model.EmployeeDTO;
 import com.motta.employee_service.service.EmployeeService;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class EmployeeController {
 
 	@Autowired
 	private EmployeeService employeeService;
 
+	@Value("${employee_service.employee.age.max}") // Injecting the value of app.greeting from application.properties
+	private String greeting;
+
+	@GetMapping("/greet")
+	public String greet() {
+		return greeting; // Return the value of app.greeting
+	}
+
 	// create Employee REST API
 	@PostMapping("/employees")
-	public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+	public ResponseEntity<EmployeeDTO> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
 		EmployeeDTO savedEmployee = employeeService.createEmployee(employeeDTO);
 		return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
 	}

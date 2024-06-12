@@ -3,16 +3,15 @@ package com.motta.employee_service.entity;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.NotEmpty;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @SequenceGenerator(name = "Custom_Sequence", sequenceName = "custom_sequence", initialValue = 1000, allocationSize = 1)
@@ -22,7 +21,7 @@ public class Employee {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "Custom_Sequence")
 	private Integer id;
 
-	@Size(min = 6, max = 6, message = "Please provide at least 6 difits for the employee number")
+	@Size(min = 6, max = 6, message = "Please provide at least 6 digits for the employee number")
 	@Pattern(regexp = "(^$|[0-9]{10})")
 	private Integer employeeNumber;
 
@@ -39,7 +38,7 @@ public class Employee {
 	@NotEmpty(message = "Gender is mandatory")
 	private String gender;
 
-	@Email(message = "Email should be valid")
+	// @Email(regexp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$")
 	private String email;
 
 	@Size(min = 10, max = 10, message = "Phone number must contain only ten digits")
@@ -65,14 +64,6 @@ public class Employee {
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
 	}
 
 	public Integer getId() {
@@ -115,6 +106,14 @@ public class Employee {
 		this.lastName = lastName;
 	}
 
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -134,7 +133,7 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", employeeNumber=" + employeeNumber + ", age=" + age + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + "]";
+				+ ", lastName=" + lastName + ", gender=" + gender + ", email=" + email + ", phone=" + phone + "]";
 	}
 
 }

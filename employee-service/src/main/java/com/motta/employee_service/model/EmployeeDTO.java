@@ -91,4 +91,11 @@ public class EmployeeDTO {
 		this.gender = gender;
 	}
 
+	@Override
+	public String toString() {
+		return "EmployeeDTO [id=" + id + ", employeeNumber=" + employeeNumber + ", age=" + age + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender
+				+ "]";
+	}
+
 }

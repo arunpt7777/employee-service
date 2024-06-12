@@ -1,4 +1,4 @@
-package com.motta.employee_service.exception;
+package com.motta.salary_service.exception;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +21,7 @@ public class CustomisedResponseEntityExceptionHandler extends ResponseEntityExce
 		return new ResponseEntity(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@ExceptionHandler(EmployeeNotFoundException.class)
+	@ExceptionHandler(SalaryNotFoundException.class)
 	public final ResponseEntity<ErrorDetails> handleEmployeeNotFoundException(Exception ex, WebRequest request)
 			throws Exception {
 		ErrorDetails errorDetails = new ErrorDetails(LocalDateTime.now(), ex.getMessage(),
