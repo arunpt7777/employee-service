@@ -67,6 +67,7 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		existingEmployee.setFirstName(employeeDTO.getFirstName());
 		existingEmployee.setLastName(employeeDTO.getLastName());
 		existingEmployee.setPhone(employeeDTO.getPhone());
+		existingEmployee.setSalaryId(employeeDTO.getSalaryId());
 
 		Employee updatedEmployee = repository.save(existingEmployee);
 		return EmployeeMapper.mapToEmployeeDTO(updatedEmployee);

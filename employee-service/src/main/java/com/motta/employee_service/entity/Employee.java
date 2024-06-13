@@ -8,7 +8,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.SequenceGenerator;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
@@ -45,6 +44,8 @@ public class Employee {
 	@Pattern(regexp = "(^$|[0-9]{10})")
 	private String phone;
 
+	private Integer salaryId;
+
 	public Employee() {
 
 	}
@@ -53,8 +54,7 @@ public class Employee {
 			@Min(value = 18, message = "Age must be greater than 18") @Max(value = 90, message = "Age must be smaller than 90") Integer age,
 			@NotEmpty(message = "first name is mandatory") String firstName,
 			@NotEmpty(message = "Last name is mandatory") String lastName,
-			@NotEmpty(message = "Gender is mandatory") String gender,
-			@Email(message = "Email should be valid") String email, String phone) {
+			@NotEmpty(message = "Gender is mandatory") String gender, String email, String phone, Integer salaryId) {
 		super();
 		this.id = id;
 		this.employeeNumber = employeeNumber;
@@ -64,6 +64,7 @@ public class Employee {
 		this.gender = gender;
 		this.email = email;
 		this.phone = phone;
+		this.salaryId = salaryId;
 	}
 
 	public Integer getId() {
@@ -130,10 +131,19 @@ public class Employee {
 		this.phone = phone;
 	}
 
+	public Integer getSalaryId() {
+		return salaryId;
+	}
+
+	public void setSalaryId(Integer salaryId) {
+		this.salaryId = salaryId;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", employeeNumber=" + employeeNumber + ", age=" + age + ", firstName=" + firstName
-				+ ", lastName=" + lastName + ", gender=" + gender + ", email=" + email + ", phone=" + phone + "]";
+				+ ", lastName=" + lastName + ", gender=" + gender + ", email=" + email + ", phone=" + phone
+				+ ", salaryId=" + salaryId + "]";
 	}
 
 }

@@ -10,12 +10,13 @@ public class EmployeeDTO {
 	private String email;
 	private String phone;
 	private String gender;
+	private Integer salaryId;
 
 	public EmployeeDTO() {
 	}
 
 	public EmployeeDTO(Integer id, Integer employeeNumber, Integer age, String firstName, String lastName, String email,
-			String phone, String gender) {
+			String phone, String gender, Integer salaryId) {
 		super();
 		this.id = id;
 		this.employeeNumber = employeeNumber;
@@ -25,6 +26,7 @@ public class EmployeeDTO {
 		this.email = email;
 		this.phone = phone;
 		this.gender = gender;
+		this.salaryId = salaryId;
 	}
 
 	public Integer getId() {
@@ -91,11 +93,19 @@ public class EmployeeDTO {
 		this.gender = gender;
 	}
 
+	public Integer getSalaryId() {
+		return salaryId;
+	}
+
+	public void setSalaryId(Integer salaryId) {
+		this.salaryId = salaryId;
+	}
+
 	@Override
 	public String toString() {
 		return "EmployeeDTO [id=" + id + ", employeeNumber=" + employeeNumber + ", age=" + age + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender
-				+ "]";
+				+ ", salaryId=" + salaryId + "]";
 	}
 
 }
