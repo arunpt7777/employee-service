@@ -1,5 +1,6 @@
 package com.motta.employee_service.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -68,6 +69,9 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		existingEmployee.setLastName(employeeDTO.getLastName());
 		existingEmployee.setPhone(employeeDTO.getPhone());
 		existingEmployee.setSalaryId(employeeDTO.getSalaryId());
+		existingEmployee.setAddresses(employeeDTO.getAddresses());
+		existingEmployee.setCreatedAt(employeeDTO.getCreatedAt());
+		existingEmployee.setModifiedAt(new Timestamp(System.currentTimeMillis()));
 
 		Employee updatedEmployee = repository.save(existingEmployee);
 		return EmployeeMapper.mapToEmployeeDTO(updatedEmployee);

@@ -9,7 +9,9 @@ public class AddressMapper {
 	// Convert Address JPA Entity into AddressDTO
 	public static AddressDTO mapToAddressDTO(Address address) {
 		AddressDTO addressDTO = new AddressDTO(address.getId(), address.getAddressLine1(), address.getAddressLine2(),
-				address.getZipCode(), address.getAddressType().toString());
+				address.getZipCode(), address.getAddressType().toString(), address.getEmployeeId(),
+				address.getEmployee(), address.getModifiedAt(), address.getCreatedAt());
+
 		return addressDTO;
 	}
 
@@ -19,7 +21,8 @@ public class AddressMapper {
 		AddressType addressType = AddressType.valueOf(addressDTO.getAddressType());
 
 		Address address = new Address(addressDTO.getId(), addressDTO.getAddressLine1(), addressDTO.getAddressLine2(),
-				addressDTO.getZipCode(), addressType);
+				addressDTO.getZipCode(), addressType, addressDTO.getEmployeeId(), addressDTO.getEmployee(),
+				addressDTO.getModifiedAt(), addressDTO.getCreatedAt());
 		return address;
 	}
 }

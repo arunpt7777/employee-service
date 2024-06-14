@@ -1,5 +1,10 @@
 package com.motta.employee_service.model;
 
+import java.sql.Timestamp;
+import java.util.List;
+
+import com.motta.employee_service.entity.Address;
+
 public class EmployeeDTO {
 
 	private Integer id;
@@ -11,12 +16,16 @@ public class EmployeeDTO {
 	private String phone;
 	private String gender;
 	private Integer salaryId;
+	private List<Address> addresses;
+	public Timestamp modifiedAt;
+	public Timestamp createdAt;
 
 	public EmployeeDTO() {
 	}
 
 	public EmployeeDTO(Integer id, Integer employeeNumber, Integer age, String firstName, String lastName, String email,
-			String phone, String gender, Integer salaryId) {
+			String phone, String gender, Integer salaryId, List<Address> addresses, Timestamp modifiedAt,
+			Timestamp createdAt) {
 		super();
 		this.id = id;
 		this.employeeNumber = employeeNumber;
@@ -27,6 +36,9 @@ public class EmployeeDTO {
 		this.phone = phone;
 		this.gender = gender;
 		this.salaryId = salaryId;
+		this.addresses = addresses;
+		this.modifiedAt = modifiedAt;
+		this.createdAt = createdAt;
 	}
 
 	public Integer getId() {
@@ -101,11 +113,36 @@ public class EmployeeDTO {
 		this.salaryId = salaryId;
 	}
 
+	public List<Address> getAddresses() {
+		return addresses;
+	}
+
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
+	}
+
+	public Timestamp getModifiedAt() {
+		return modifiedAt;
+	}
+
+	public void setModifiedAt(Timestamp modifiedAt) {
+		this.modifiedAt = modifiedAt;
+	}
+
+	public Timestamp getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Timestamp createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	@Override
 	public String toString() {
 		return "EmployeeDTO [id=" + id + ", employeeNumber=" + employeeNumber + ", age=" + age + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + ", gender=" + gender
-				+ ", salaryId=" + salaryId + "]";
+				+ ", salaryId=" + salaryId + ", addresses=" + addresses + ", modifiedAt=" + modifiedAt + ", createdAt="
+				+ createdAt + "]";
 	}
 
 }

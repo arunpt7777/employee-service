@@ -69,6 +69,7 @@ public class AddressServiceImplementation implements AddressService {
 		existingAddress.setAddressLine2(addressDTO.getAddressLine2());
 		existingAddress.setZipCode(addressDTO.getZipCode());
 		existingAddress.setAddressType(addressType);
+		existingAddress.setEmployeeId(addressDTO.getEmployeeId());
 
 		Address updatedAddress = repository.save(existingAddress);
 		return AddressMapper.mapToAddressDTO(updatedAddress);
