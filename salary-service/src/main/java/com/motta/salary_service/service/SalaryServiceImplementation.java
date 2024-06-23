@@ -61,7 +61,8 @@ public class SalaryServiceImplementation implements SalaryService {
 			throw new SalaryNotFoundException(
 					"Salary id = " + salaryDTO.getId() + " not found. Please enter different id");
 
-		existingSalary.setAmount(salaryDTO.getAmount());
+		existingSalary.setSalaryPerDay(salaryDTO.getSalaryPerDay());
+		existingSalary.setTotalSalary(salaryDTO.getTotalSalary());
 		existingSalary.setCurrency(salaryDTO.getCurrency());
 
 		Salary updatedSalary = repository.save(existingSalary);

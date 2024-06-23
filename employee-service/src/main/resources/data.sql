@@ -16,5 +16,7 @@ INSERT INTO address (id, address_line1, address_line2, zip_code, address_type, e
 (1,'Greenwich','Connecticut','123456','PERMANENT', 10001),
 (2,'San Antonio','Texas','123456','PERMANENT', 10002),
 (3,'Toronto','Canada','123456','PERMANENT', 10003),
-(4,'St Louis','Missouri','123456','RESIDENTIAL', 10004)
+(4,'San Antonio','Texas','123456','RESIDENTIAL', 10001),
+(5,'Death Valley','California','123456','RESIDENTIAL', 10002),
+(6,'Punjab','India','123456','RESIDENTIAL', 10004)
 ;
