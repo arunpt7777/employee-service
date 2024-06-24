@@ -75,4 +75,14 @@ public class SalaryController {
 		List<SalaryDTO> salariesByCurrency = salaryService.retrieveAllSalariesByCurrency(currency);
 		return new ResponseEntity<>(salariesByCurrency, HttpStatus.OK);
 	}
+
+	// Retrieve Salary for a given EmployeeId
+	@GetMapping("/calculatesalary/{employeeId}")
+	public SalaryDTO calculateSalary(@PathVariable("employeeId") Integer employeeId) {
+
+		SalaryDTO salaryDTO = salaryService.calculateSalary(employeeId);
+		return salaryDTO;
+
+	}
+
 }

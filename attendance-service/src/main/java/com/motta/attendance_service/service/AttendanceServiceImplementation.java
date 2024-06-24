@@ -75,4 +75,11 @@ public class AttendanceServiceImplementation implements AttendanceService {
 		repository.deleteById(id);
 	}
 
+	@Override
+	public AttendanceDTO retrieveAttendanceByEmployeeId(Integer employeeId) {
+		List<Attendance> attendances = repository.findAll();
+		return attendances.stream().filter(attendance -> attendance.getEmployeeId().equals(employeeId))
+				.map(AttendanceMapper::mapToAttendanceDTO).collect(Collectors.toList()).getFirst();
+	}
+
 }

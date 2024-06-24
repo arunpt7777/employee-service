@@ -69,4 +69,11 @@ public class AttendanceController {
 		attendanceService.deleteAttendance(id);
 		return new ResponseEntity<>("Attendance successfully deleted!", HttpStatus.OK);
 	}
+
+	// Retrieve All Attendances by employeeId REST API
+	@GetMapping("/attendancesByEmployeeId/{employeeId}")
+	public ResponseEntity<AttendanceDTO> getAllAttendancesByEmployeeId(@PathVariable("employeeId") Integer employeeId) {
+		AttendanceDTO attendanceDTO = attendanceService.retrieveAttendanceByEmployeeId(employeeId);
+		return new ResponseEntity<>(attendanceDTO, HttpStatus.OK);
+	}
 }

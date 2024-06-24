@@ -16,4 +16,6 @@ public interface AttendanceService {
 
 	AttendanceDTO updateAttendance(AttendanceDTO attendanceDTO);
 
+	AttendanceDTO retrieveAttendanceByEmployeeId(Integer employeeId);
+
 }
