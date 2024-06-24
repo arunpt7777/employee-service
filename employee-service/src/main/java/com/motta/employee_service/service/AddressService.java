@@ -16,6 +16,6 @@ public interface AddressService {
 
 	void deleteAddress(Integer id);
 
-	List<AddressDTO> retrieveAllAddresssByType(String type);
+	List<AddressDTO> retrieveAllAddressesByType(String type);
 
 }

@@ -71,8 +71,8 @@ public class AddressController {
 
 	// Retrieve All Addresses by type REST API
 	@GetMapping("/address/type/{type}")
-	public ResponseEntity<List<AddressDTO>> getAllAddresssByGender(@PathVariable("type") String addressType) {
-		List<AddressDTO> typeOfAddresses = addressService.retrieveAllAddresssByType(addressType);
+	public ResponseEntity<List<AddressDTO>> getAllAddressesByType(@PathVariable("type") String addressType) {
+		List<AddressDTO> typeOfAddresses = addressService.retrieveAllAddressesByType(addressType);
 		return new ResponseEntity<>(typeOfAddresses, HttpStatus.OK);
 	}
 }

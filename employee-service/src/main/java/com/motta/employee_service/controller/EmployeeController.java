@@ -70,10 +70,20 @@ public class EmployeeController {
 		return new ResponseEntity<>("Employee successfully deleted!", HttpStatus.OK);
 	}
 
-	// Retrieve All Employees by gender REST API
-	@GetMapping("/employeesByGender/{gender}")
-	public ResponseEntity<List<EmployeeDTO>> getAllEmployeesByGender(@PathVariable("gender") String gender) {
-		List<EmployeeDTO> maleEmployees = employeeService.retrieveAllEmployeesByGender(gender);
-		return new ResponseEntity<>(maleEmployees, HttpStatus.OK);
+	// Count Employees by gender REST API
+	@GetMapping("/countemployeesbygender/{gender}")
+	public ResponseEntity<Long> countEmployeesByGender(@PathVariable("gender") String gender) {
+		List<EmployeeDTO> employeesByGender = employeeService.retrieveAllEmployeesByGender(gender);
+		Long count = employeesByGender.stream().count();
+		System.out.println("number of  " + gender + " employees: " + count);
+		return new ResponseEntity<>(count, HttpStatus.OK);
 	}
+
+	// Retrieve All Employees by gender REST API
+	@GetMapping("/getemployeesbygender/{gender}")
+	public ResponseEntity<List<EmployeeDTO>> getAllEmployeesByGender(@PathVariable("gender") String gender) {
+		List<EmployeeDTO> employeesByGender = employeeService.retrieveAllEmployeesByGender(gender);
+		return new ResponseEntity<>(employeesByGender, HttpStatus.OK);
+	}
+
 }

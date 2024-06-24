@@ -1,6 +1,7 @@
 package com.motta.employee_service.service;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -8,8 +9,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.motta.employee_service.entity.Address;
 import com.motta.employee_service.entity.Employee;
+import com.motta.employee_service.exception.AddressNotFoundException;
 import com.motta.employee_service.exception.EmployeeAlreadyExistsException;
+import com.motta.employee_service.exception.EmployeeHasDuplicateAddressesException;
 import com.motta.employee_service.exception.EmployeeNotFoundException;
 import com.motta.employee_service.mapper.EmployeeMapper;
 import com.motta.employee_service.model.EmployeeDTO;
@@ -32,6 +36,14 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		if (employee.isPresent())
 			throw new EmployeeAlreadyExistsException("Employee id = " + employeeDTO.getId() + " already Exists!");
 
+		List<Address> addresses = employee.get().getAddresses();
+		if (addresses.isEmpty())
+			throw new AddressNotFoundException("Employee must have address details");
+
+		if (!areAllUnique(addresses)) {
+			throw new EmployeeHasDuplicateAddressesException("Employee cannot have duplicate Addresses");
+		}
+
 		// Convert EmployeeDTO into User JPA Entity
 		Employee newEmployee = EmployeeMapper.mapToEmployee(employeeDTO);
 		Employee savedEmployee = repository.save(newEmployee);
@@ -39,6 +51,10 @@ public class EmployeeServiceImplementation implements EmployeeService {
 		// Convert Employee JPA entity to UserDto
 		EmployeeDTO savedEmployeeDTO = EmployeeMapper.mapToEmployeeDTO(savedEmployee);
 		return savedEmployeeDTO;
+	}
+
+	public static <Address> boolean areAllUnique(List<Address> list) {
+		return list.stream().allMatch(new HashSet<>()::add);
 	}
 
 	@Override

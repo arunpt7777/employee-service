@@ -82,7 +82,7 @@ public class AddressServiceImplementation implements AddressService {
 	}
 
 	@Override
-	public List<AddressDTO> retrieveAllAddresssByType(String addressType) {
+	public List<AddressDTO> retrieveAllAddressesByType(String addressType) {
 		List<Address> addresss = repository.findAll();
 		return addresss.stream().filter(emp -> emp.getAddressType().toString().equalsIgnoreCase(addressType))
 				.map(AddressMapper::mapToAddressDTO).collect(Collectors.toList());
