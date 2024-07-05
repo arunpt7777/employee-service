@@ -86,4 +86,12 @@ public class EmployeeController {
 		return new ResponseEntity<>(employeesByGender, HttpStatus.OK);
 	}
 
+	// Retrieve All Employees by gender using Native QueryREST API
+	@GetMapping("/employeesbygendernative/{age}/{gender}")
+	public ResponseEntity<List<EmployeeDTO>> findEmployeeByGenderNativeQuery(@PathVariable("age") Integer age,
+			@PathVariable("gender") String gender) {
+		List<EmployeeDTO> employees = employeeService.findEmployeeByGenderUsingNativeQuery(age, gender);
+		return new ResponseEntity<>(employees, HttpStatus.OK);
+	}
+
 }

@@ -18,4 +18,6 @@ public interface EmployeeService {
 
 	List<EmployeeDTO> retrieveAllEmployeesByGender(String gender);
 
+	List<EmployeeDTO> findEmployeeByGenderUsingNativeQuery(Integer age, String gender);
+
 }

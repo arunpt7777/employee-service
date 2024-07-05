@@ -87,4 +87,5 @@ public class AddressServiceImplementation implements AddressService {
 		return addresss.stream().filter(emp -> emp.getAddressType().toString().equalsIgnoreCase(addressType))
 				.map(AddressMapper::mapToAddressDTO).collect(Collectors.toList());
 	}
+
 }
